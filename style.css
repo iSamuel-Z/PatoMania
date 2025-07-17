@@ -5,6 +5,20 @@
     box-sizing: border-box;
 }
 
+/* Remove contorno azul em dispositivos móveis */
+*, *:focus, *:active {
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+}
+
+button, a, input, textarea, select {
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
 body {
     font-family: 'Comic Neue', cursive, sans-serif;
     background: url('assets/reference/baixados.jfif');

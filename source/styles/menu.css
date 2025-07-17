@@ -72,6 +72,12 @@ body {
     transition: all 0.3s ease;
     border: 5px solid white;
     animation: pulse 2s infinite;
+    /* Remove contorno azul em dispositivos móveis */
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .play-button:hover {
@@ -103,6 +109,12 @@ body {
     text-decoration: none;
     color: white;
     transition: transform 0.2s ease;
+    /* Remove contorno azul em dispositivos móveis */
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
 }
 
 .bottom-menu-item:hover {
