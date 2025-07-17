@@ -1,0 +1,167 @@
+/* Reset e estilos base */
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Nunito', sans-serif;
+    height: 100vh;
+    overflow: hidden;
+    position: relative;
+    color: #fff;
+}
+
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../../assets/stage/fase-1.png');
+    background-size: cover;
+    background-position: center;
+    z-index: -1;
+}
+
+.menu-container {
+    height: 100%;
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    position: relative;
+    max-width: 500px;
+    margin: 0 auto;
+}
+
+.header {
+    text-align: center;
+    padding: 30px 0;
+    position: relative;
+    z-index: 1;
+}
+
+.logo {
+    width: 180px;
+    height: auto;
+    filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.3));
+    animation: bounce 2s infinite alternate;
+}
+
+.main-content {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 20px;
+}
+
+.play-button {
+    width: 150px;
+    height: 150px;
+    background: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.4);
+    transition: all 0.3s ease;
+    border: 5px solid white;
+    animation: pulse 2s infinite;
+}
+
+.play-button:hover {
+    transform: scale(1.1);
+    box-shadow: 0 12px 35px rgba(0, 0, 0, 0.5);
+}
+
+.play-button:active {
+    transform: scale(0.95);
+}
+
+.play-button i {
+    font-size: 80px;
+    margin-left: 10px;
+}
+
+.bottom-menu {
+    display: flex;
+    justify-content: space-around;
+    align-items: flex-start;
+    width: 100%;
+    padding: 20px 0;
+}
+
+.bottom-menu-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-decoration: none;
+    color: white;
+    transition: transform 0.2s ease;
+}
+
+.bottom-menu-item:hover {
+    transform: scale(1.1);
+}
+
+.bottom-menu-item .icon-bg {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 8px;
+    background: rgba(255, 255, 255, 0.15);
+    backdrop-filter: blur(5px);
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+.bottom-menu-item i {
+    font-size: 24px;
+}
+
+.bottom-menu-item span {
+    font-size: 0.9rem;
+    font-weight: 600;
+}
+
+
+@keyframes bounce {
+    from {
+        transform: translateY(0) scale(1);
+    }
+
+    to {
+        transform: translateY(-5px) scale(1.025);
+    }
+}
+
+@keyframes pulse {
+    0% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+
+    50% {
+        transform: scale(1.15);
+        box-shadow: 0 0 30px rgba(255, 255, 255, 0.9);
+    }
+
+    100% {
+        transform: scale(1.05);
+        box-shadow: 0 0 15px rgba(255, 255, 255, 0.7);
+    }
+}
+
+.footer {
+    margin: 40px 0;
+    font-size: 0.85rem;
+    color: rgba(255, 255, 255, 0.7);
+    text-align: center;
+}
