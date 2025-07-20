@@ -58,6 +58,12 @@ body::before {
     position: relative;
     border-radius: 20px;
     box-shadow: 0 0 20px rgba(0,0,0,0.5);
+    opacity: 1;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.main-container.fade-out {
+    opacity: 0;
 }
 
 /* Estilos para o botão de tela cheia */

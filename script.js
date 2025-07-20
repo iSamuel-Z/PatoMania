@@ -27,8 +27,13 @@ document.addEventListener('DOMContentLoaded', () => {
     const mainContainer = document.querySelector('.main-container');
     const head = document.querySelector('head');
 
-    // Função para carregar o conteúdo, estilo e script de uma página
+    // Função para carregar o conteúdo, estilo e script de uma página com transição suave
     const loadPage = async (pageName) => {
+        mainContainer.classList.add('fade-out');
+
+        // Espera a animação de fade-out terminar
+        await new Promise(resolve => setTimeout(resolve, 400));
+
         // Remove o CSS e o SCRIPT da página anterior, se houver
         const oldStyle = document.getElementById('page-style');
         if (oldStyle) {
@@ -62,6 +67,9 @@ document.addEventListener('DOMContentLoaded', () => {
         } catch (error) {
             console.error('Erro ao carregar a página:', error);
             mainContainer.innerHTML = '<p>Erro ao carregar o conteúdo. Tente novamente mais tarde.</p>';
+        } finally {
+            // Garante que o fade-in ocorra mesmo se houver erro no carregamento
+            mainContainer.classList.remove('fade-out');
         }
     };
 
