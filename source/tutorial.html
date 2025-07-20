@@ -1,0 +1,97 @@
+<!-- Cutscene de Abertura -->
+<div id="cutscene-container" class="active">
+    <div id="shake-wrapper">
+        <div id="background" class="background-scene">
+        <img src="assets/stage/cenario.png" alt="Cenário" id="cenario-bg">
+    </div>
+    
+    <!-- Caixa de diálogo de pensamento -->
+    <div id="thought-dialog" class="hidden">
+        <div id="thought-text">Vamos à caça!</div>
+    </div>
+    
+    <!-- Patos na cutscene -->
+    <div id="ducks-container">
+        <img src="assets/duck/pato-bicando.png" alt="Pato bicando" class="duck calm-duck" id="duck1">
+        <img src="assets/duck/pato-sentado.png" alt="Pato sentado" class="duck calm-duck" id="duck2">
+        <img src="assets/duck/pato-deitado.png" alt="Pato deitado" class="duck calm-duck" id="duck3">
+    </div>
+    
+    <!-- Efeito de tiro -->
+    <div id="shot-effect" class="hidden">
+        <img src="assets/duck/tiro.png" alt="Tiro" id="shot-sprite">
+    </div>
+    </div>
+</div>
+
+<!-- Tutorial Interativo -->
+<div id="tutorial-container" class="hidden">
+    <!-- HUD Superior -->
+    <div id="hud-top">
+        <div id="score">Pontuação: <span id="score-value">0</span></div>
+        <div id="shots-remaining">Tiros: <span id="shots-value">3</span></div>
+        <div id="ducks-remaining">
+            <img src="assets/duck/pato-sentado.png" alt="Pato" class="duck-icon" id="duck-icon-1">
+            <img src="assets/duck/pato-sentado.png" alt="Pato" class="duck-icon" id="duck-icon-2">
+            <img src="assets/duck/pato-sentado.png" alt="Pato" class="duck-icon" id="duck-icon-3">
+        </div>
+    </div>
+    
+    <!-- Área de jogo -->
+    <div id="game-area">
+        <div id="tutorial-background">
+            <img src="assets/stage/cenario.png" alt="Cenário Tutorial" id="tutorial-bg">
+        </div>
+        
+        <!-- Patos do tutorial -->
+        <div id="tutorial-ducks">
+            <img src="assets/duck/pato-asas-fechada.png" alt="Pato Tutorial" class="tutorial-duck" id="tutorial-duck-1">
+            <img src="assets/duck/pato-asas-central.png" alt="Pato Tutorial" class="tutorial-duck hidden" id="tutorial-duck-2">
+            <img src="assets/duck/pato-asas-fechada.png" alt="Pato Tutorial" class="tutorial-duck hidden" id="tutorial-duck-3">
+        </div>
+        
+        <!-- Cursor/Mira -->
+        <div id="crosshair"></div>
+        
+        <!-- Indicador de clique -->
+        <img src="assets/tools/clique.png" alt="Clique aqui" id="click-indicator" class="hidden" style="margin-top: 5px;">
+    </div>
+
+    <!-- UI Inferior Fixa -->
+    <div id="ui-bottom">
+        <!-- Patonildo -->
+        <div id="patonildo-container">
+            <img src="assets/protagonist/patonildo-tutorial-1.png" alt="Patonildo" id="patonildo-sprite">
+        </div>
+        
+        <!-- Caixa de Diálogo -->
+        <div id="dialog-box">
+            <div id="dialog-text">Bem-vindo ao PatoMania!</div>
+            <button id="continue-btn" class="btn-primary">▶</button>
+        </div>
+    </div>
+</div>
+
+<!-- Modal de Conclusão -->
+<div id="completion-modal" class="modal hidden">
+    <div class="modal-content">
+        <img src="assets/protagonist/patonildo.png" alt="Patonildo" id="completion-patonildo">
+        <h2>Parabéns!</h2>
+        <p>Você completou o treino, vamos atrás de mais patos!</p>
+        <button id="finish-tutorial-btn" class="btn-primary pulse">Continuar</button>
+    </div>
+</div>
+
+<!-- Audio Elements -->
+<audio id="ambient-audio" loop>
+    <!-- Placeholder para sons ambiente -->
+</audio>
+<audio id="shot-audio">
+    <!-- Placeholder para som de tiro -->
+</audio>
+<audio id="duck-hit-audio">
+    <!-- Placeholder para som de acerto -->
+</audio>
+<audio id="victory-audio">
+    <!-- Placeholder para som de vitória -->
+</audio>

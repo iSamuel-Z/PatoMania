@@ -1,0 +1,687 @@
+/* PatoMania Tutorial - Mobile-First Design */
+/* Resolução base: 1080x1920 (vertical) */
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Arial', sans-serif;
+    background: #87CEEB;
+    overflow: hidden;
+    width: 100vw;
+    height: 100vh;
+    position: relative;
+    user-select: none;
+    -webkit-user-select: none;
+    -webkit-touch-callout: none;
+
+    /* Remove outline mobile */
+    outline: none;
+    -webkit-tap-highlight-color: transparent;
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+/* Utilitários */
+.hidden {
+    display: none !important;
+}
+
+.active {
+    display: block;
+}
+
+/* SEÇÃO 1 - CUTSCENE DE ABERTURA */
+#cutscene-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 10;
+    animation: fadeIn 1.5s ease-in-out;
+}
+
+.background-scene {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    overflow: hidden;
+}
+
+#cenario-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    /* Câmera fixa - sem movimento */
+}
+
+@keyframes fadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+/* Patos na cutscene */
+#ducks-container {
+    position: absolute;
+    bottom: 8%;
+    width: 100%;
+    height: 40%;
+    transform: scale(0.9);
+    z-index: 2;
+}
+
+.duck {
+    position: absolute;
+    width: 85px;
+    height: 85px;
+    object-fit: contain;
+    transition: all 0.3s ease;
+    /* Garantir que os patos estejam visíveis desde o início */
+    opacity: 1;
+}
+
+#duck1 {
+    left: 10%;
+    bottom: -19%;
+    animation: duckIdle 3s ease-in-out infinite;
+}
+
+#duck2 {
+    left: 72%;
+    bottom: -19%;
+    animation: duckIdle 3s ease-in-out infinite 1s;
+}
+
+#duck3 {
+    right: 32%;
+    bottom: -15%;
+    animation: duckIdle 3s ease-in-out infinite 2s;
+}
+
+@keyframes duckIdle {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-5px); }
+}
+
+/* Caixa de diálogo de pensamento */
+#thought-dialog {
+    position: absolute;
+    top: 10%;
+    left: 50%;
+    transform: translateX(-50%);
+    background: rgba(255, 255, 255, 0.95);
+    border: 3px solid #2c3e50;
+    border-radius: 20px;
+    padding: 15px 25px;
+    max-width: 300px;
+    text-align: center;
+    z-index: 20;
+    box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+    animation: thoughtBubble 0.5s ease-out;
+}
+
+#thought-dialog::before {
+    content: '';
+    position: absolute;
+    bottom: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 15px solid transparent;
+    border-right: 15px solid transparent;
+    border-top: 15px solid #2c3e50;
+}
+
+#thought-dialog::after {
+    content: '';
+    position: absolute;
+    bottom: -12px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 0;
+    height: 0;
+    border-left: 12px solid transparent;
+    border-right: 12px solid transparent;
+    border-top: 12px solid rgba(255, 255, 255, 0.95);
+}
+
+#thought-text {
+    font-family: 'Arial', sans-serif;
+    font-size: 16px;
+    font-weight: bold;
+    color: #2c3e50;
+    margin: 0;
+}
+
+@keyframes thoughtBubble {
+    0% {
+        opacity: 0;
+        transform: translateX(-50%) scale(0.8);
+    }
+    100% {
+        opacity: 1;
+        transform: translateX(-50%) scale(1);
+    }
+}
+
+/* Efeito de tiro */
+#shot-effect {
+    position: absolute;
+    top: 80%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    z-index: 15;
+}
+
+#shot-sprite {
+    width: 50px;
+    height: 50px;
+    animation: shotFlash 0.5s ease-out;
+}
+
+@keyframes shotFlash {
+    0% { opacity: 0; transform: scale(0.5); }
+    50% { opacity: 1; transform: scale(1.2); }
+    100% { opacity: 0; transform: scale(1); }
+}
+
+/* Animação de patos assustados */
+.scared {
+    animation: duckScared 0.5s ease-out;
+}
+
+@keyframes duckScared {
+    0% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-20px) scale(1.1); }
+    100% { transform: translateY(0px) scale(1); }
+}
+
+/* Animação de voo melhorada */
+.flying {
+    animation: duckFlyUp 4s ease-out forwards !important;
+}
+
+.flying.fly-left {
+    animation: duckFlyLeft 4s ease-out forwards !important;
+}
+
+.flying.fly-right {
+    animation: duckFlyRight 4s ease-out forwards !important;
+}
+
+@keyframes duckFlyUp {
+    0% { 
+        transform: translateY(0px) scale(1) rotate(0deg); 
+        opacity: 1; 
+    }
+    30% {
+        transform: translateY(-150px) scale(0.9) rotate(-5deg);
+        opacity: 1;
+    }
+    70% { 
+        transform: translateY(-400px) scale(0.4) rotate(-15deg); 
+        opacity: 0.6; 
+    }
+    100% { 
+        transform: translateY(-700px) scale(0.1) rotate(-25deg); 
+        opacity: 0; 
+    }
+}
+
+@keyframes duckFlyLeft {
+    0% { 
+        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); 
+        opacity: 1; 
+    }
+    30% {
+        transform: translateY(-100px) translateX(-80px) scale(0.8) rotate(-10deg);
+        opacity: 1;
+    }
+    70% { 
+        transform: translateY(-350px) translateX(-250px) scale(0.3) rotate(-35deg); 
+        opacity: 0.5; 
+    }
+    100% { 
+        transform: translateY(-600px) translateX(-500px) scale(0.05) rotate(-50deg); 
+        opacity: 0; 
+    }
+}
+
+@keyframes duckFlyRight {
+    0% { 
+        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); 
+        opacity: 1; 
+    }
+    30% {
+        transform: translateY(-100px) translateX(80px) scale(0.8) rotate(10deg);
+        opacity: 1;
+    }
+    70% { 
+        transform: translateY(-350px) translateX(250px) scale(0.3) rotate(35deg); 
+        opacity: 0.5; 
+    }
+    100% { 
+        transform: translateY(-600px) translateX(500px) scale(0.05) rotate(50deg); 
+        opacity: 0; 
+    }
+}
+
+#shake-wrapper {
+    width: 100%;
+    height: 100%;
+}
+
+.camera-shake {
+    animation: cameraShake 0.5s ease-in-out;
+}
+
+@keyframes cameraShake {
+    0%, 100% { transform: translateX(0px); }
+    25% { transform: translateX(-5px); }
+    75% { transform: translateX(5px); }
+}
+
+/* SEÇÃO 2 - TUTORIAL INTERATIVO */
+#tutorial-container {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 20;
+    background: linear-gradient(180deg, #87CEEB 0%, #98FB98 100%);
+    animation: slideIn 1s ease-out;
+}
+
+@keyframes slideIn {
+from { transform: translateY(100%); }
+to { transform: translateY(0%); }
+}
+
+/* HUD Superior - 15% da tela */
+#hud-top {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 15vh;
+    background: linear-gradient(180deg, rgba(0,0,0,0.9), rgba(0,0,0,0.7));
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 0 20px;
+    box-shadow: 0 2px 10px rgba(0,0,0,0.3);
+    z-index: 10;
+    color: white;
+    font-size: 18px;
+    font-weight: bold;
+}
+
+#ducks-remaining {
+    display: flex;
+    gap: 5px;
+}
+
+.duck-icon {
+    width: 30px;
+    height: 30px;
+    object-fit: contain;
+    transition: opacity 0.3s ease;
+}
+
+.duck-icon.hit {
+    opacity: 0.3;
+    filter: grayscale(100%);
+}
+
+/* Área de jogo - 60% da tela */
+#game-area {
+    position: absolute;
+    top: 15vh;
+    left: 0;
+    width: 100%;
+    height: 59vh;
+    overflow: hidden;
+}
+
+/* Cenário de fundo - ocupa toda a tela */
+#tutorial-background {
+    position: absolute;
+    z-index: 1;
+}
+
+#tutorial-bg {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Patos do tutorial */
+#tutorial-ducks {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    z-index: 3;
+}
+
+.tutorial-duck {
+    position: absolute;
+    width: 65px;
+    height: 65px;
+    object-fit: contain;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    animation: tutorialDuckIdle 2s ease-in-out infinite;
+}
+
+#tutorial-duck-1 {
+    left: 30%;
+    top: 55%;
+}
+
+#tutorial-duck-2 {
+    left: 65%;
+    top: 45%;
+}
+
+#tutorial-duck-3 {
+    left: 20%;
+    top: 25%;
+}
+
+@keyframes tutorialDuckIdle {
+    0%, 100% { transform: translateY(0px) scale(1); }
+    50% { transform: translateY(-8px) scale(1.05); }
+}
+
+.tutorial-duck:hover {
+    transform: scale(1.1);
+    filter: brightness(1.2);
+}
+
+/* Cursor/Mira */
+#crosshair {
+    position: absolute;
+    width: 40px;
+    height: 40px;
+    border: 3px solid #ff0000;
+    border-radius: 50%;
+    pointer-events: none;
+    z-index: 10;
+    opacity: 0.8;
+    transition: all 0.1s ease;
+    display: none;
+}
+
+#crosshair::before {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 20px;
+    height: 2px;
+    background: #ff0000;
+    transform: translate(-50%, -50%);
+}
+
+#crosshair::after {
+    content: '';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 2px;
+    height: 20px;
+    background: #ff0000;
+    transform: translate(-50%, -50%);
+}
+
+/* Indicador de clique */
+#click-indicator {
+    position: absolute;
+    width: 60px;
+    height: 60px;
+    z-index: 15;
+    animation: clickPulse 1s ease-in-out infinite;
+    pointer-events: none;
+}
+
+@keyframes clickPulse {
+    0%, 100% { transform: scale(1); opacity: 0.8; }
+    50% { transform: scale(1.2); opacity: 1; }
+}
+
+/* UI Inferior Fixa - 25% da tela */
+#ui-bottom {
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    height: 25vh;
+    background: linear-gradient(180deg, rgba(0,0,0,0.7), rgba(0,0,0,0.9));
+    display: flex;
+    align-items: center;
+    padding: 10px 20px;
+    z-index: 20;
+}
+
+#patonildo-container {
+width: 120px;
+height: 120px;
+flex-shrink: 0;
+    flex-shrink: 0;
+}
+
+#patonildo-sprite {
+    width: 100%;
+    height: 100%;
+    object-fit: contain;
+    animation: patonildoTalk 2s ease-in-out infinite;
+}
+
+@keyframes patonildoTalk {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+#dialog-box {
+    flex: 1;
+    margin-left: 20px;
+    background: white;
+    border-radius: 15px;
+    padding: 20px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
+    position: relative;
+}
+
+#dialog-box::before {
+    content: '';
+    position: absolute;
+    left: -15px;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 0;
+    height: 0;
+    border-top: 15px solid transparent;
+    border-bottom: 15px solid transparent;
+    border-right: 15px solid white;
+}
+
+#dialog-text {
+    font-size: 18px;
+    color: #333;
+    margin-bottom: 15px;
+    line-height: 1.4;
+    min-height: 50px;
+}
+
+/* Botões */
+.btn-primary {
+    background: #ffc222;
+    color: white;
+    border: none;
+    border-radius: 25px;
+    padding: 12px 30px;
+    font-size: 16px;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    min-width: 120px;
+}
+
+.btn-primary:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 6px 12px rgba(0, 0, 0, 0.3);
+}
+
+.btn-primary:active {
+    transform: translateY(0px);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+}
+
+#continue-btn {
+    position: fixed;
+    bottom: 4%;
+    right: 11%;
+    padding: 12px 16px 12px 17px;
+    min-width: 25px;
+    transform: translateX(50%);
+}
+
+.pulse {
+    animation: buttonPulse 2s ease-in-out infinite;
+}
+
+@keyframes buttonPulse {
+    0%, 100% { transform: scale(1); }
+    50% { transform: scale(1.05); }
+}
+
+/* Modal de Conclusão */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: rgba(0, 0, 0, 0.8);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 100;
+    animation: modalFadeIn 0.5s ease-out;
+}
+
+@keyframes modalFadeIn {
+    from { opacity: 0; }
+    to { opacity: 1; }
+}
+
+.modal-content {
+    background:linear-gradient(180deg, rgba(255,255,255,0.8), rgba(255,255,255,1));
+    border-radius: 20px;
+    padding: 40px;
+    text-align: center;
+    max-width: 80%;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    animation: modalSlideIn 0.5s ease-out;
+}
+
+@keyframes modalSlideIn {
+    from { transform: translateY(-50px); opacity: 0; }
+    to { transform: translateY(0px); opacity: 1; }
+}
+
+#completion-patonildo {
+    width: 100px;
+    height: 100px;
+    object-fit: contain;
+    margin-bottom: 20px;
+    animation: celebrationBounce 1s ease-in-out infinite;
+}
+
+@keyframes celebrationBounce {
+    0%, 100% { transform: translateY(0px); }
+    50% { transform: translateY(-10px); }
+}
+
+.modal-content h2 {
+    color: #333;
+    font-size: 28px;
+    margin-bottom: 15px;
+}
+
+.modal-content p {
+    color: #666;
+    font-size: 18px;
+    margin-bottom: 25px;
+}
+
+/* Efeitos de acerto */
+.hit-effect {
+    animation: hitFlash 0.3s ease-out;
+}
+
+@keyframes hitFlash {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(2) saturate(2); }
+    100% { filter: brightness(1); }
+}
+
+.falling {
+    animation: duckFall 1s ease-in forwards;
+}
+
+@keyframes duckFall {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100px) rotate(45deg); opacity: 0; }
+}
+
+/* Responsividade para diferentes tamanhos */
+@media (max-width: 480px) {
+    #hud-top {
+        font-size: 14px;
+        padding: 0 15px;
+    }
+    
+    .duck-icon {
+        width: 25px;
+        height: 25px;
+    }
+    
+    #dialog-text {
+        font-size: 16px;
+    }
+    
+    .btn-primary {
+        font-size: 14px;
+        padding: 10px 25px;
+    }
+    
+    .tutorial-duck {
+        width: 55px;
+        height: 55px;
+    }
+}
+
+@media (max-height: 600px) {
+    #ui-bottom {
+        height: 150px;
+    }
+    
+    #patonildo-container {
+        width: 80px;
+        height: 80px;
+    }
+    
+    #dialog-text {
+        min-height: 30px;
+        font-size: 14px;
+    }
+}
