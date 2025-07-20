@@ -20,6 +20,22 @@
     animation: bounce 2s infinite alternate;
 }
 
+#loading-text {
+    color: #ffc222;
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 10px;
+}
+
+.loading-wrapper {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+    opacity: 0;
+    animation: fadeIn 1s forwards 1.5s;
+}
+
 .loading {
     width: 80%;
     max-width: 300px;
@@ -27,10 +43,7 @@
     background: #fff;
     border-radius: 10px;
     overflow: hidden;
-    margin-top: 20px;
     position: relative;
-    opacity: 0;
-    animation: fadeIn 1s forwards 1.5s;
 }
 
 .loading-bar {
@@ -89,4 +102,31 @@
     10% { opacity: 0.7; }
     50% { transform: translateY(-20px) rotate(5deg); }
     100% { transform: translateY(0) rotate(0deg); opacity: 0.7; }
+}
+
+/* Estilos para o modo paisagem */
+@media (orientation: landscape) {
+    .splash-container {
+        flex-direction: column; /* Força a direção da coluna */
+        justify-content: center; /* Centraliza o conteúdo verticalmente */
+        gap: 15px;
+    }
+
+    .logo {
+        width: 150px; /* Logo um pouco menor */
+        height: 150px;
+        margin-bottom: 0; /* O gap do container já cuida do espaço */
+        animation: none; /* Desativa a animação de pulo para evitar cortes */
+    }
+
+    /* Ajusta o wrapper do loading em vez do loading diretamente */
+    .loading-wrapper {
+        width: 80%;
+        max-width: 300px;
+    }
+
+    .duck {
+        width: 50px;
+        height: 50px;
+    }
 }

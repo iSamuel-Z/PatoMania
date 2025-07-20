@@ -315,3 +315,60 @@ body {
         font-size: 0.8rem;
     }
 }
+
+/* Estilos para o modo paisagem - Abordagem Compacta */
+@media (orientation: landscape) and (max-height: 500px) {
+    .menu-container {
+        padding: 10px 20px;
+        justify-content: space-evenly; /* Distribui o espaço verticalmente */
+    }
+
+    .header {
+        padding: 0;
+    }
+
+    .logo {
+        width: 140px;
+        animation: none; /* Remove animações que causam saltos */
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .main-content {
+        margin-bottom: 0;
+        flex-grow: 0.5; /* Reduz o espaço que ele ocupa */
+    }
+
+    .play-button {
+        width: 75px;
+        height: 75px;
+        animation: none;
+        transform: scale(1);
+        opacity: 1;
+    }
+
+    .play-button i {
+        font-size: 45px;
+    }
+
+    .bottom-menu {
+        padding: 0;
+        width: 95%;
+        animation: none;
+        opacity: 1;
+        transform: translateY(0);
+    }
+
+    .bottom-menu-item .icon-bg {
+        width: 45px;
+        height: 45px;
+    }
+
+    .bottom-menu-item i {
+        font-size: 20px;
+    }
+
+    .footer {
+        display: none; /* Esconde o rodapé para ganhar espaço */
+    }
+}
