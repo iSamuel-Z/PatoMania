@@ -196,7 +196,7 @@ class TutorialCutscene {
         
         if (position === 'left') {
             this.shotEffect.style.left = '85%';
-            this.shotEffect.style.top = '55%';
+            this.shotEffect.style.top = '60%';
         } else if (position === 'right') {
             this.shotEffect.style.left = '30%';
             this.shotEffect.style.top = '50%';
