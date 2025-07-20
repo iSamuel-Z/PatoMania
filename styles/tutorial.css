@@ -79,7 +79,9 @@ body {
     position: absolute;
     width: 85px;
     height: 85px;
-    object-fit: contain;
+    background-size: contain;
+    background-position: center;
+    background-repeat: no-repeat;
     transition: all 0.3s ease;
     /* Garantir que os patos estejam visíveis desde o início */
     opacity: 1;
@@ -88,18 +90,21 @@ body {
 #duck1 {
     left: 10%;
     bottom: -19%;
+    background-image: url('../assets/duck/pato-bicando.png');
     animation: duckIdle 3s ease-in-out infinite;
 }
 
 #duck2 {
     left: 72%;
     bottom: -19%;
+    background-image: url('../assets/duck/pato-sentado.png');
     animation: duckIdle 3s ease-in-out infinite 1s;
 }
 
 #duck3 {
-    right: 32%;
+    right: 40%;
     bottom: -15%;
+    background-image: url('../assets/duck/pato-deitado.png');
     animation: duckIdle 3s ease-in-out infinite 2s;
 }
 
@@ -684,4 +689,18 @@ flex-shrink: 0;
         min-height: 30px;
         font-size: 14px;
     }
+}
+
+@media (orientation: landscape) {
+    #duck1 {
+        background-image: url("../assets/duck/pato-asas-central.png");
+    }
+    
+    #duck2 {
+        background-image: url("../assets/duck/pato-asas-central.png");
+    }
+    
+    #duck3 {
+        background-image: url("../assets/duck/pato-asas-fechada.png");
+    } 
 }

@@ -161,7 +161,7 @@ class TutorialCutscene {
         
         // Patos assustados
         Object.values(this.ducks).forEach(duck => {
-            duck.src = 'assets/duck/pato-assustado.png';
+            duck.style.backgroundImage = "url('assets/duck/pato-assustado.png')";
             duck.classList.add('scared');
         });
         
@@ -275,7 +275,7 @@ class TutorialCutscene {
         
         let wingFrame = 0;
         const wingInterval = setInterval(() => {
-            duck.src = wingSprites[wingFrame % wingSprites.length];
+            duck.style.backgroundImage = `url('${wingSprites[wingFrame % wingSprites.length]}')`;
             wingFrame++;
             
             if (wingFrame > 9) { // 3 ciclos completos
@@ -319,10 +319,12 @@ class TutorialCutscene {
         // Esconder botão continuar durante digitação
         this.continueBtn.style.display = 'none';
         
-        // Diálogo inicial
-        this.typeText('Vamos pegar todos esses patonildos!', () => {
-            this.continueBtn.style.display = 'block';
-        });
+        // Diálogo inicial (com atraso para troca de imagem)
+        setTimeout(() => {
+            this.typeText('Vamos pegar todos esses patonildos!', () => {
+                this.continueBtn.style.display = 'block';
+            });
+        }, 100);
         
         // Esconder todos os patos do tutorial inicialmente
         this.tutorialDucks.forEach(duck => duck.classList.add('hidden'));
@@ -349,17 +351,19 @@ class TutorialCutscene {
         // Patonildo tutorial 2
         this.patonildoSprite.src = 'assets/protagonist/patonildo-tutorial-2.png';
         
-        // Novo diálogo
-        this.typeText('Toque no pato para testarmos sua mira!', () => {
-            // Mostrar primeiro pato
-            this.tutorialDucks[0].classList.remove('hidden');
-            
-            // Mostrar indicador de clique
-            this.showClickIndicator(this.tutorialDucks[0]);
-            
-            // Ativar mira
-            this.crosshair.style.display = 'block';
-        });
+        // Novo diálogo (com atraso)
+        setTimeout(() => {
+            this.typeText('Toque no pato para testarmos sua mira!', () => {
+                // Mostrar primeiro pato
+                this.tutorialDucks[0].classList.remove('hidden');
+                
+                // Mostrar indicador de clique
+                this.showClickIndicator(this.tutorialDucks[0]);
+                
+                // Ativar mira
+                this.crosshair.style.display = 'block';
+            });
+        }, 100);
     }
     
     showTutorialStep3() {
@@ -372,12 +376,14 @@ class TutorialCutscene {
         // Patonildo tutorial 3
         this.patonildoSprite.src = 'assets/protagonist/patonildo-tutorial-3.png';
         
-        // Novo diálogo
-        this.typeText('Agora acerte os demais patos!', () => {
-            // Mostrar patos restantes
-            this.tutorialDucks[1].classList.remove('hidden');
-            this.tutorialDucks[2].classList.remove('hidden');
-        });
+        // Novo diálogo (com atraso)
+        setTimeout(() => {
+            this.typeText('Agora acerte os demais patos!', () => {
+                // Mostrar patos restantes
+                this.tutorialDucks[1].classList.remove('hidden');
+                this.tutorialDucks[2].classList.remove('hidden');
+            });
+        }, 100);
     }
     
     shootDuck(duckIndex) {
@@ -391,14 +397,14 @@ class TutorialCutscene {
         duck.classList.add('hit-effect');
         
         // Trocar sprite para pato acertado
-        duck.src = 'assets/duck/pato-acertado.png';
+        duck.style.backgroundImage = "url('assets/duck/pato-acertado.png')";
         
         // Som de acerto
         console.log(' Som de impacto leve');
         
         setTimeout(() => {
             // Animação de queda
-            duck.src = 'assets/duck/pato-caindo.png';
+            duck.style.backgroundImage = "url('assets/duck/pato-caindo.png')";
             duck.classList.add('falling');
             
             // Atualizar HUD
