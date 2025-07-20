@@ -546,8 +546,8 @@ flex-shrink: 0;
 }
 
 #continue-btn {
-    position: fixed;
-    bottom: 4%;
+    position: absolute;
+    bottom: -5%;
     right: 11%;
     padding: 12px 16px 12px 17px;
     min-width: 25px;
