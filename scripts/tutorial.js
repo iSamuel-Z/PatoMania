@@ -196,10 +196,10 @@ class TutorialCutscene {
         
         if (position === 'left') {
             this.shotEffect.style.left = '85%';
-            this.shotEffect.style.top = '60%';
+            this.shotEffect.style.top = '50%';
         } else if (position === 'right') {
             this.shotEffect.style.left = '30%';
-            this.shotEffect.style.top = '50%';
+            this.shotEffect.style.top = '40%';
 
         } else {
             this.shotEffect.style.left = '50%';
@@ -238,14 +238,14 @@ class TutorialCutscene {
         const duckNames = ['duck1', 'duck2', 'duck3'];
         
         // Animar patos voando
-        Object.values(this.ducks).forEach((duck, index) => {
-            // Ciclo de animação das asas
-            this.animateWings(duck, index);
-            
+        Object.values(this.ducks).forEach((duck, index) => {            
             // Aplicar animação de voo com direção específica
             setTimeout(() => {
                 // Limpar classes anteriores
                 duck.classList.remove('scared', 'calm-duck');
+
+                // Ciclo de animação das asas
+                this.animateWings(duck, index); 
                 
                 // Aplicar animação de voo
                 duck.classList.add('flying');
@@ -260,7 +260,7 @@ class TutorialCutscene {
                 } else {
                     console.log(` ${duckNames[index]} voando para CIMA`);
                 }
-            }, index * 400); // Delay escalonado aumentado
+            }, index * 200); // Delay escalonado aumentado
         });
         
         console.log(' Efeitos sonoros: asas batendo, quacks apressados');
@@ -281,7 +281,7 @@ class TutorialCutscene {
             if (wingFrame > 9) { // 3 ciclos completos
                 clearInterval(wingInterval);
             }
-        }, 150);
+        }, 250);
     }
     
     transitionToTutorial() {

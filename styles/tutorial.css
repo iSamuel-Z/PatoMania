@@ -260,19 +260,19 @@ body {
 
 @keyframes duckFlyRight {
     0% { 
-        transform: translateY(0px) translateX(0px) scale(1) rotate(0deg); 
+        transform: translateY(0px) translateX(0px) scaleX(-1) scale(1) rotate(0deg); 
         opacity: 1; 
     }
     30% {
-        transform: translateY(-100px) translateX(80px) scale(0.8) rotate(10deg);
+        transform: translateY(-100px) translateX(80px) scaleX(-1) scale(0.8) rotate(10deg);
         opacity: 1;
     }
     70% { 
-        transform: translateY(-350px) translateX(250px) scale(0.3) rotate(35deg); 
+        transform: translateY(-350px) translateX(250px) scaleX(-1) scale(0.3) rotate(35deg); 
         opacity: 0.5; 
     }
     100% { 
-        transform: translateY(-600px) translateX(500px) scale(0.05) rotate(50deg); 
+        transform: translateY(-600px) translateX(500px) scaleX(-1) scale(0.05) rotate(50deg); 
         opacity: 0; 
     }
 }
