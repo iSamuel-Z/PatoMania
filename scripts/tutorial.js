@@ -396,15 +396,16 @@ class TutorialCutscene {
         // Efeito visual de acerto
         duck.classList.add('hit-effect');
         
-        // Trocar sprite para pato acertado
-        duck.style.backgroundImage = "url('assets/duck/pato-acertado.png')";
+        // Trocar para imagem de pato acertado
+        duck.src = 'assets/duck/pato-acertado.png';
         
         // Som de acerto
         console.log(' Som de impacto leve');
         
         setTimeout(() => {
             // Animação de queda
-            duck.style.backgroundImage = "url('assets/duck/pato-caindo.png')";
+            duck.src = 'assets/duck/pato-caindo.png';
+            duck.classList.remove('hit-effect');
             duck.classList.add('falling');
             
             // Atualizar HUD
