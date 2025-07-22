@@ -1,30 +1,44 @@
-// PatoMania - Menu Principal
-// Sistema de interações limpo e organizado
+// PatoMania - Menu Principal com Modais
 
 class MenuController {
     constructor() {
+        this.cacheDOMElements();
         this.init();
+    }
+
+    cacheDOMElements() {
+        // Modais
+        this.howToPlayModal = document.getElementById('how-to-play-modal');
+        this.optionsModal = document.getElementById('options-modal');
+        this.allModals = document.querySelectorAll('.modal');
+
+        // Botões
+        this.playButton = document.querySelector('.play-button');
+        this.menuItems = document.querySelectorAll('.bottom-menu-item');
+        this.closeButtons = document.querySelectorAll('.close-btn');
+
+        // Controles de Opções
+        this.volumeSliders = document.querySelectorAll('input[type="range"]');
+        this.resetOptionsBtn = document.getElementById('reset-options');
     }
 
     init() {
         this.setupClickHandlers();
         this.setupKeyboardNavigation();
+        this.setupModalHandlers();
+        this.setupOptionsHandlers();
         this.setupSoundPlaceholders();
     }
 
     setupClickHandlers() {
-        // Botão principal de jogar
-        const playButton = document.querySelector('.play-button');
-        if (playButton) {
-            playButton.addEventListener('click', (e) => {
+        if (this.playButton) {
+            this.playButton.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.handlePlayClick();
             });
         }
 
-        // Itens do menu inferior
-        const menuItems = document.querySelectorAll('.bottom-menu-item');
-        menuItems.forEach((item, index) => {
+        this.menuItems.forEach((item, index) => {
             item.addEventListener('click', (e) => {
                 e.preventDefault();
                 this.handleMenuItemClick(index);
@@ -33,8 +47,11 @@ class MenuController {
     }
 
     setupKeyboardNavigation() {
-        // Navegação por teclado para acessibilidade
         document.addEventListener('keydown', (e) => {
+            if (e.key === 'Escape') {
+                this.allModals.forEach(modal => this.closeModal(modal));
+            }
+
             if (e.key === 'Enter' || e.key === ' ') {
                 const focused = document.activeElement;
                 if (focused.classList.contains('play-button')) {
@@ -42,7 +59,7 @@ class MenuController {
                     this.handlePlayClick();
                 } else if (focused.classList.contains('bottom-menu-item')) {
                     e.preventDefault();
-                    const index = Array.from(document.querySelectorAll('.bottom-menu-item')).indexOf(focused);
+                    const index = Array.from(this.menuItems).indexOf(focused);
                     this.handleMenuItemClick(index);
                 }
             }
@@ -51,61 +68,86 @@ class MenuController {
 
     handlePlayClick() {
         console.log('🎮 Iniciando jogo...');
-        // Dispara um evento para o script principal carregar a página do jogo
         window.dispatchEvent(new CustomEvent('playGame'));
     }
 
     handleMenuItemClick(index) {
-        const menuOptions = ['Como Jogar', 'Créditos', 'Opções'];
+        const menuOptions = ['Como Jogar', 'Placar', 'Opções'];
         console.log(`📋 Abrindo: ${menuOptions[index]}`);
         
         switch(index) {
             case 0: // Como Jogar
-                this.showHowToPlay();
+                this.openModal(this.howToPlayModal);
                 break;
-            case 1: // Créditos
-                this.showCredits();
+            case 1: // Placar
+                this.showScoreboard();
                 break;
             case 2: // Opções
-                this.showOptions();
+                this.openModal(this.optionsModal);
                 break;
         }
     }
 
-    showHowToPlay() {
-        console.log('📖 Exibindo tutorial...');
-        // Implementar modal ou página de tutorial
+    setupModalHandlers() {
+        this.closeButtons.forEach(button => {
+            button.addEventListener('click', () => {
+                const modalId = button.getAttribute('data-modal');
+                const modal = document.getElementById(modalId);
+                if (modal) this.closeModal(modal);
+            });
+        });
+
+        this.allModals.forEach(modal => {
+            modal.addEventListener('click', (e) => {
+                if (e.target === modal) {
+                    this.closeModal(modal);
+                }
+            });
+        });
     }
 
-    showCredits() {
-        console.log('👥 Exibindo créditos...');
-        // Implementar modal de créditos
+    setupOptionsHandlers() {
+        this.volumeSliders.forEach(slider => {
+            const valueSpan = slider.nextElementSibling;
+            valueSpan.textContent = `${slider.value}%`;
+            slider.addEventListener('input', (e) => {
+                valueSpan.textContent = `${e.target.value}%`;
+            });
+        });
+
+        if (this.resetOptionsBtn) {
+            this.resetOptionsBtn.addEventListener('click', () => {
+                console.log('Restaurando opções padrão...');
+                // Lógica para restaurar opções aqui
+            });
+        }
     }
 
-    showOptions() {
-        console.log('⚙️ Exibindo opções...');
-        // Implementar modal de configurações
+    openModal(modal) {
+        if (!modal) return;
+        modal.classList.remove('hidden');
+    }
+
+    closeModal(modal) {
+        if (!modal) return;
+        modal.classList.add('hidden');
+    }
+
+    showScoreboard() {
+        console.log('🏆 Exibindo placar... (funcionalidade futura)');
+        // Futuramente, pode abrir um modal ou uma nova página
     }
 
     setupSoundPlaceholders() {
-        // Placeholders para sistema de áudio futuro
-        const playButton = document.querySelector('.play-button');
-        const menuItems = document.querySelectorAll('.bottom-menu-item');
-
-        if (playButton) {
-            playButton.addEventListener('mouseenter', () => {
-                console.log('🔊 Som: hover botão play');
-            });
+        if (this.playButton) {
+            this.playButton.addEventListener('mouseenter', () => console.log('🔊 Som: hover botão play'));
         }
-
-        menuItems.forEach(item => {
-            item.addEventListener('mouseenter', () => {
-                console.log('🔊 Som: hover menu item');
-            });
+        this.menuItems.forEach(item => {
+            item.addEventListener('mouseenter', () => console.log('🔊 Som: hover menu item'));
         });
     }
 }
 
 // Inicializa o controller assim que o script é carregado
 new MenuController();
-console.log('🎯 Menu PatoMania carregado com sucesso!');
+console.log('🎯 Menu PatoMania com modais carregado com sucesso!');

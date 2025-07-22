@@ -50,7 +50,7 @@ body::before {
 /* Estilos para o container principal que simula a tela do celular */
 .main-container {
     width: 100%;
-    max-width: 480px;
+    max-width: 420px;
     height: 102vh;
     max-height: 960px;
     background: #000;

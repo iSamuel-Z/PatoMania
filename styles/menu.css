@@ -145,7 +145,7 @@ body {
     display: flex;
     justify-content: space-around;
     align-items: flex-start;
-    width: 100%;
+    width: 95%;
     padding: 20px 0;
     opacity: 0;
     transform: translateY(30px);
@@ -370,5 +370,373 @@ body {
 
     .footer {
         display: none; /* Esconde o rodapé para ganhar espaço */
+    }
+}
+
+/* ===== ESTILOS DOS MODAIS (TEMA GLASSMORPHISM CLARO) ===== */
+
+/* Fundo do Modal (Overlay) */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.3);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 1000;
+    opacity: 0;
+    visibility: hidden;
+    transition: opacity 0.3s ease, visibility 0.3s ease;
+    backdrop-filter: blur(8px);
+    -webkit-backdrop-filter: blur(8px);
+}
+
+.modal:not(.hidden) {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Conteúdo do Modal */
+.modal-content {
+    background: rgba(255, 255, 255, 0.6);
+    backdrop-filter: blur(15px);
+    -webkit-backdrop-filter: blur(15px);
+    color: #34495e;
+    border-radius: 20px;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.2);
+    width: 90%;
+    max-width: 600px;
+    max-height: 90vh;
+    display: flex;
+    flex-direction: column;
+    border: 1px solid rgba(255, 255, 255, 0.8);
+    transform: scale(0.9);
+    opacity: 0;
+    transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1), opacity 0.3s ease;
+}
+
+.modal:not(.hidden) .modal-content {
+    transform: scale(1);
+    opacity: 1;
+}
+
+/* Header do Modal */
+.modal-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 20px 25px;
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+.modal-header h2 {
+    font-size: 1.8rem;
+    font-family: 'Comic Neue', cursive;
+    text-shadow: none;
+    color: #f0f0f0;
+}
+
+.modal-header h2 i {
+    margin-right: 12px;
+    color: #ffc222;
+}
+
+.close-btn {
+    background: transparent;
+    border: none;
+    color: #34495e;
+    font-size: 1.6rem;
+    cursor: pointer;
+    transition: transform 0.2s ease, color 0.2s ease;
+}
+
+.close-btn:hover {
+    transform: scale(1.2);
+    color: #ffc222;
+}
+
+/* Corpo do Modal */
+.modal-body {
+    padding: 25px;
+    overflow-y: auto;
+    flex-grow: 1;
+}
+
+/* Estilização da Scrollbar no corpo do modal */
+.modal-body::-webkit-scrollbar {
+    width: 12px;
+}
+
+.modal-body::-webkit-scrollbar-track {
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 10px;
+}
+
+.modal-body::-webkit-scrollbar-thumb {
+    background-color: #fff;
+    border-radius: 10px;
+    border: 3px solid transparent;
+    background-clip: padding-box;
+}
+
+
+.modal-body::-webkit-scrollbar-button {
+    display: none;
+}
+
+/* Footer do Modal */
+.modal-footer {
+    padding: 20px 25px;
+    background-color: rgba(255, 255, 255, 0.3);
+    border-top: 1px solid rgba(0, 0, 0, 0.1);
+    border-bottom-left-radius: 20px;
+    border-bottom-right-radius: 20px;
+    display: flex;
+    justify-content: flex-end;
+    gap: 15px;
+}
+
+/* Botões genéricos */
+.btn-primary, .btn-secondary {
+    padding: 12px 25px;
+    border-radius: 10px;
+    border: 1px solid transparent;
+    font-weight: bold;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+.btn-primary {
+    background-color: #ffc222;
+    color: #f0f0f0;
+    box-shadow: 0 4px 15px rgba(0,0,0, 0.1);
+}
+
+.btn-primary:hover {
+    background-color: #ffc222;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 20px rgba(0,0,0, 0.15);
+}
+
+.btn-secondary {
+    background-color: rgba(0, 0, 0, 0.05);
+    color: #f0f0f0;
+    border-color: rgba(0, 0, 0, 0.1);
+}
+
+.btn-secondary:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 0, 0, 0.2);
+}
+
+/* --- Estilos Específicos para "Como Jogar" --- */
+.instructions-section {
+    display: flex;
+    flex-direction: column;
+    gap: 25px;
+}
+
+.instruction-item {
+    display: flex;
+    align-items: flex-start;
+    gap: 20px;
+}
+
+.instruction-icon {
+    flex-shrink: 0;
+    width: 50px;
+    height: 50px;
+    background-color: rgba(0, 0, 0, 0.05);
+    border-radius: 12px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: 1.5rem;
+    color: #ffc222;
+    border: 1px solid rgba(0, 0, 0, 0.08);
+}
+
+.instruction-text h3 {
+    margin-bottom: 5px;
+    font-size: 1.2rem;
+    color: #f9f9f9;
+    font-family: 'Comic Neue', cursive;
+}
+
+.instruction-text p {
+    font-size: 1rem;
+    line-height: 1.6;
+    color: #f0f0f0;
+}
+
+/* --- Estilos Específicos para "Opções" --- */
+.options-section {
+    display: flex;
+    flex-direction: column;
+    gap: 30px;
+}
+
+.option-group {
+    border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+    padding-bottom: 20px;
+}
+
+.option-group:last-child {
+    border-bottom: none;
+}
+
+.option-group h3 {
+    font-size: 1.3rem;
+    margin-bottom: 15px;
+    color: #f0f0f0;
+    font-family: 'Comic Neue', cursive;
+}
+
+.option-item {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 15px;
+}
+
+.option-item label {
+    font-size: 1rem;
+    color: #34495e;
+}
+
+/* Controles de Volume */
+.volume-control {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    width: 60%;
+}
+
+input[type="range"] {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 100%;
+    height: 6px;
+    background: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    outline: none;
+    transition: opacity .2s;
+}
+
+input[type="range"]::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #ffc222;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+    transition: background-color 0.2s ease;
+}
+input[type="range"]:hover::-webkit-slider-thumb {
+    background-color: #ffc222;
+}
+
+input[type="range"]::-moz-range-thumb {
+    width: 20px;
+    height: 20px;
+    background: #fff;
+    cursor: pointer;
+    border-radius: 50%;
+    border: 3px solid #ffc222;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.2);
+}
+input[type="range"]:hover::-moz-range-thumb {
+    background-color: #ffc222;
+}
+
+.volume-value {
+    min-width: 40px;
+    text-align: right;
+    color: #34495e;
+}
+
+/* Select (Dropdown) */
+select {
+    background-color: rgba(255, 255, 255, 0.7);
+    color: #34495e;
+    padding: 10px 15px;
+    border-radius: 8px;
+    border: 1px solid rgba(0, 0, 0, 0.1);
+    font-size: 1rem;
+    font-family: 'Nunito', sans-serif;
+}
+
+/* Checkbox customizado */
+.checkbox-label {
+    display: flex;
+    align-items: center;
+    cursor: pointer;
+    color: #34495e;
+}
+
+.checkbox-label input {
+    display: none;
+}
+
+.checkmark {
+    width: 22px;
+    height: 22px;
+    background-color: rgba(0, 0, 0, 0.1);
+    border-radius: 5px;
+    margin-right: 12px;
+    position: relative;
+    border: 1px solid rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s ease;
+}
+
+.checkbox-label:hover .checkmark {
+    background-color: rgba(0, 0, 0, 0.2);
+}
+
+.checkmark::after {
+    content: '';
+    position: absolute;
+    display: none;
+    left: 7px;
+    top: 3px;
+    width: 5px;
+    height: 10px;
+    border: solid #34495e;
+    border-width: 0 3px 3px 0;
+    transform: rotate(45deg);
+}
+
+.checkbox-label input:checked + .checkmark {
+    background-color: #f0f0f0;
+    border-color: #ffc222;
+}
+
+.checkbox-label input:checked + .checkmark::after {
+    display: block;
+}
+
+/* Responsividade do Modal */
+@media (max-width: 600px) {
+    .modal-header h2 {
+        font-size: 1.5rem;
+    }
+    .modal-body, .modal-header, .modal-footer {
+        padding: 15px;
+    }
+    .option-item {
+        flex-direction: column;
+        align-items: flex-start;
+        gap: 10px;
+    }
+    .volume-control {
+        width: 100%;
     }
 }
