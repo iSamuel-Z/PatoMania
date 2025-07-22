@@ -1,4 +1,22 @@
-<div class="game-container">
-    <h1>O Jogo Começa!</h1>
-    <!-- A lógica do jogo virá aqui -->
-</div>
+<head>
+    <link rel="stylesheet" href="/styles/game.css">
+</head>
+<body>
+    <div class="game-container">
+        <!-- Tela de fundo -->
+        <div id="background" class="background"></div>
+
+        <!-- Contagem regressiva -->
+        <div id="countdown" class="countdown">3</div>
+
+        <!-- Container dos patos -->
+        <div id="ducks-container"></div>
+
+        <!-- Conteúdo do jogo -->
+        <div id="game-content" class="hidden">
+            <h1>Fase 1 Iniciada!</h1>
+        </div>
+    </div>
+
+    <script src="/scripts/game.js"></script>
+</body>

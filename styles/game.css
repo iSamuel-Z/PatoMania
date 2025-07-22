@@ -1,5 +1,184 @@
+/* Estilo principal da tela do jogo */
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    font-family: sans-serif;
+    background: black;
+    overflow: hidden;
+}
+
 .game-container {
     color: white;
     text-align: center;
-    padding-top: 100px;
+    position: relative;
+    width: 100%;
+    height: 100vh;
+}
+
+/* Fundo da fase */
+.background {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-image: url('../assets/stage/fase-1.png');
+    background-size: cover;
+    background-position: center;
+    z-index: 0;
+    opacity: 0;
+    animation: fadeIn 1s ease-out forwards;
+}
+
+/* Animação de fade no fundo */
+@keyframes fadeIn {
+    to {
+        opacity: 1;
+    }
+}
+
+/* Estilo da contagem regressiva */
+.countdown {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 100px;
+    color: white;
+    z-index: 10;
+    font-weight: bold;
+    opacity: 1;
+    animation: pop 0.5s ease-in-out;
+}
+
+@keyframes pop {
+    0% { transform: translate(-50%, -50%) scale(1.2); opacity: 0.3; }
+    50% { transform: translate(-50%, -50%) scale(1.6); opacity: 1; }
+    100% { transform: translate(-50%, -50%) scale(1.2); opacity: 1; }
+}
+
+/* Oculta elementos */
+.hidden {
+    display: none;
+}
+
+body, html {
+    margin: 0;
+    padding: 0;
+    height: 100%;
+    overflow: hidden;
+}
+
+.game-container {
+    width: 100%;
+    height: 100%;
+    position: relative;
+    background-color: #cceeff;
+}
+
+#background {
+    width: 100%;
+    height: 100%;
+    background: url('../assets/stage/cenario.png') no-repeat center center;
+    background-size: cover;
+    position: absolute;
+    z-index: 0;
+}
+
+.countdown {
+    position: absolute;
+    font-size: 5rem;
+    color: white;
+    font-weight: bold;
+    top: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    z-index: 10;
+    animation: pop 0.3s ease;
+}
+
+@keyframes pop {
+    0% { transform: translateX(-50%) scale(1); }
+    50% { transform: translateX(-50%) scale(1.5); }
+    100% { transform: translateX(-50%) scale(1); }
+}
+
+.hidden {
+    display: none;
+}
+
+#ducks-container {
+    position: absolute;
+    width: 100%;
+    height: 100%;
+    top: 0;
+    left: 0;
+    z-index: 5;
+    pointer-events: none;
+}
+.duck {
+    position: absolute;
+    width: 100px;          /* aumentei para mostrar imagem inteira */
+    height: 100px;         /* ajuste conforme a resolução da imagem */
+    background-size: contain;  /* para ajustar a imagem inteira dentro do div */
+    background-repeat: no-repeat;
+    pointer-events: auto;
+    cursor: crosshair;
+    will-change: transform, left, top;
+}
+
+.duck.falling {
+    animation: fall 1s linear forwards !important;
+}
+
+@keyframes fly-left {
+    from {
+        left: -100px;
+    }
+    to {
+        left: 110%;
+    }
+}
+
+@keyframes fly-right {
+    from {
+        left: 110%;
+    }
+    to {
+        left: -100px;
+    }
+}
+
+@keyframes baterAsas {
+    0%, 100% { background-image: url('../assets/duck/pato-asas-aberta.png'); }
+    33% { background-image: url('../assets/duck/pato-asas-central.png'); }
+    66% { background-image: url('../assets/duck/pato-asas-fechada.png'); }
+}
+
+@keyframes queda {
+    to {
+        top: calc(100% - 80px); /* até o chão, ajuste conforme o tamanho do pato */
+        transform: rotate(90deg);
+        opacity: 1;
+    }
+}
+
+.duck.caindo {
+    animation: queda 1s ease-in forwards;
+    position: absolute;
+}
+
+.duck.flying {
+    animation: flyAcross 6s linear forwards;
+}
+
+.duck.assustado {
+    animation: susto 0.2s ease;
+}
+
+@keyframes susto {
+    0% { transform: translateY(0); }
+    50% { transform: translateY(-20px); }
+    100% { transform: translateY(0); }
 }
