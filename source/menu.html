@@ -31,126 +31,160 @@
 </div>
 
 <!-- Modal Como Jogar -->
-<div id="how-to-play-modal" class="modal hidden">
+<div id="how-to-play-modal" class="modal hidden" style="display: none;">
     <div class="modal-content">
-        <div class="modal-header">
-            <h2><i class="fas fa-question-circle"></i> Como Jogar</h2>
-            <button class="close-btn" data-modal="how-to-play-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <div class="instructions-section">
-                <div class="instruction-item">
-                    <div class="instruction-icon"><i class="fas fa-mouse-pointer"></i></div>
-                    <div class="instruction-text">
-                        <h3>Mire e Atire</h3>
-                        <p>Use o mouse para mover a mira. Clique com o botão esquerdo para atirar nos patos que aparecerem na tela.</p>
-                    </div>
+        <button class="modal-close-btn">&times;</button>
+        <i class="fas fa-bullseye modal-icon"></i>
+        <h2>Como Jogar</h2>
+        
+        <div class="modal-scrollable-content">
+            <div class="instructions-container">
+            <div class="instruction-card">
+                <div class="instruction-icon">
+                    <i class="fas fa-mouse-pointer"></i>
                 </div>
-                <div class="instruction-item">
-                    <div class="instruction-icon"><i class="fas fa-sync-alt"></i></div>
-                    <div class="instruction-text">
-                        <h3>Recarregue sua Arma</h3>
-                        <p>Sua munição é limitada. Pressione a tecla <strong>R</strong> para recarregar e não perder nenhuma oportunidade.</p>
-                    </div>
+                <div class="instruction-text">
+                    <h4>Mire e Atire</h4>
+                    <p>Use o mouse para mirar e clique para atirar nos patos.</p>
                 </div>
-                <div class="instruction-item">
-                    <div class="instruction-icon"><i class="fas fa-star"></i></div>
-                    <div class="instruction-text">
-                        <h3>Patos Especiais</h3>
-                        <p>Fique atento a patos de cores diferentes! Eles podem valer mais pontos ou dar bônus especiais.</p>
-                    </div>
+            </div>
+            
+            <div class="instruction-card">
+                <div class="instruction-icon">
+                    <i class="fas fa-keyboard"></i>
                 </div>
-                <div class="instruction-item">
-                    <div class="instruction-icon"><i class="fas fa-clock"></i></div>
-                    <div class="instruction-text">
-                        <h3>Tempo e Vidas</h3>
-                        <p>Você tem um tempo limitado e um número de vidas. Se qualquer um dos dois acabar, o jogo termina!</p>
-                    </div>
+                <div class="instruction-text">
+                    <h4>Recarregue</h4>
+                    <p>Pressione a tecla 'R' para recarregar sua munição.</p>
+                </div>
+            </div>
+            
+            <div class="instruction-card">
+                <div class="instruction-icon">
+                    <i class="fas fa-crosshairs"></i>
+                </div>
+                <div class="instruction-text">
+                    <h4>Patos Especiais</h4>
+                    <p>Patos dourados valem mais pontos! Fique de olho.</p>
+                </div>
+            </div>
+
+            <div class="instruction-card">
+                <div class="instruction-icon">
+                    <i class="fas fa-stopwatch"></i>
+                </div>
+                <div class="instruction-text">
+                    <h4>Cuidado com o Tempo</h4>
+                    <p>O tempo é limitado. Seja rápido e preciso!</p>
                 </div>
             </div>
         </div>
+        </div>
+        
         <div class="modal-footer">
-            <button class="btn-primary close-btn" data-modal="how-to-play-modal">Entendi!</button>
+            <button id="understood-btn" class="btn-primary">Entendi!</button>
         </div>
     </div>
 </div>
 
 <!-- Modal Opções -->
-<div id="options-modal" class="modal hidden">
-    <div class="modal-content">
-        <div class="modal-header">
-            <h2><i class="fas fa-cogs"></i> Opções</h2>
-            <button class="close-btn" data-modal="options-modal">&times;</button>
-        </div>
-        <div class="modal-body">
-            <section class="options-section">
-                <div class="option-group">
-                    <h3><i class="fas fa-volume-up"></i> Áudio</h3>
-                    <div class="option-item">
-                        <label for="volume-geral">Volume Geral</label>
-                        <div class="volume-control">
-                            <input type="range" id="volume-geral" name="volume-geral" min="0" max="100" value="80">
-                            <span class="volume-value">80%</span>
+<div id="options-modal" class="modal hidden" style="display: none;">
+    <div class="modal-content options-modal-content">
+        <button class="modal-close-btn">&times;</button>
+        <i class="fas fa-cogs modal-icon"></i>
+        <h2>Opções</h2>
+        
+        <div class="modal-scrollable-content">
+            <!-- Seção Game -->
+            <div class="options-section">
+                <h3><i class="fas fa-gamepad"></i> Game</h3>
+                
+                <!-- Modo de Jogo -->
+                <div class="subsection">
+                    <h4>Modo de Jogo</h4>
+                    <div class="game-modes">
+                        <div class="game-mode-card active" data-mode="endless">
+                            <div class="mode-image">
+                                <i class="fas fa-infinity"></i>
+                            </div>
+                            <span class="mode-name">Endless</span>
+                        </div>
+                        <div class="game-mode-card disabled" data-mode="time">
+                            <div class="mode-image">
+                                <i class="fas fa-clock"></i>
+                            </div>
+                            <span class="mode-name">Time</span>
+                        </div>
+                        <div class="game-mode-card disabled" data-mode="wave">
+                            <div class="mode-image">
+                                <i class="fas fa-water"></i>
+                            </div>
+                            <span class="mode-name">Wave</span>
                         </div>
                     </div>
-                    <div class="option-item">
-                        <label for="volume-musica">Música</label>
-                        <div class="volume-control">
-                            <input type="range" id="volume-musica" name="volume-musica" min="0" max="100" value="60">
-                            <span class="volume-value">60%</span>
+                </div>
+                
+                <!-- Escolher Cenário -->
+                <div class="subsection">
+                    <h4>Escolher Cenário</h4>
+                    <div class="scenario-selection">
+                        <div class="scenario-card active" data-scenario="fase-1">
+                            <img src="assets/stage/fase-1.png" alt="Cenário 1">
+                        </div>
+                        <div class="scenario-card" data-scenario="fase-2">
+                            <img src="assets/stage/fase-2.png" alt="Cenário 2">
+                        </div>
+                        <div class="scenario-card" data-scenario="fase-3">
+                            <img src="assets/stage/fase-3.png" alt="Cenário 3">
+                        </div>
+                        <div class="scenario-card" data-scenario="fase-4">
+                            <img src="assets/stage/fase-4.png" alt="Cenário 4">
                         </div>
                     </div>
                 </div>
-
-                <div class="option-group">
-                    <h3><i class="fas fa-gamepad"></i> Jogabilidade</h3>
-                    <div class="option-item">
-                        <label for="dificuldade">Dificuldade</label>
-                        <select id="dificuldade" name="dificuldade">
-                            <option value="facil">Fácil</option>
-                            <option value="normal" selected>Normal</option>
-                            <option value="dificil">Difícil</option>
-                        </select>
-                    </div>
-                    <div class="option-item">
-                        <label class="checkbox-label" for="auto-reload">
-                            <input type="checkbox" id="auto-reload" name="auto-reload" checked>
-                            <span class="checkmark"></span>
-                            Recarga Automática
-                        </label>
-                    </div>
-                    <div class="option-item">
-                        <label class="checkbox-label" for="mostrar-mira">
-                            <input type="checkbox" id="mostrar-mira" name="mostrar-mira" checked>
-                            <span class="checkmark"></span>
-                            Mostrar Mira
-                        </label>
+            </div>
+            
+            <!-- Seção Som -->
+            <div class="options-section">
+                <h3><i class="fas fa-volume-up"></i> Som</h3>
+                
+                <div class="option-item">
+                    <label for="music-volume">Música</label>
+                    <div class="slider-container">
+                        <input type="range" id="music-volume" name="music-volume" min="0" max="100" value="80">
+                        <span class="slider-value">80%</span>
                     </div>
                 </div>
-
-                <div class="option-group">
-                    <h3><i class="fas fa-desktop"></i> Gráficos</h3>
-                    <div class="option-item">
-                        <label for="qualidade-grafica">Qualidade</label>
-                        <select id="qualidade-grafica" name="qualidade-grafica">
-                            <option value="baixa">Baixa</option>
-                            <option value="media" selected>Média</option>
-                            <option value="alta">Alta</option>
-                        </select>
-                    </div>
-                    <div class="option-item">
-                        <label class="checkbox-label" for="fullscreen">
-                            <input type="checkbox" id="fullscreen" name="fullscreen">
-                            <span class="checkmark"></span>
-                            Tela Cheia
-                        </label>
+                
+                <div class="option-item">
+                    <label for="audio-volume">Áudio</label>
+                    <div class="slider-container">
+                        <input type="range" id="audio-volume" name="audio-volume" min="0" max="100" value="80">
+                        <span class="slider-value">80%</span>
                     </div>
                 </div>
-            </section>
+            </div>
+            
+            <!-- Seção Acessibilidade -->
+            <div class="options-section">
+                <h3><i class="fas fa-universal-access"></i> Acessibilidade</h3>
+                
+                <div class="option-item">
+                    <label for="show-crosshair">Mostrar Mira</label>
+                    <button class="toggle-btn" id="show-crosshair" data-active="false">
+                        <i class="fas fa-crosshairs"></i>
+                    </button>
+                </div>
+                
+                <div class="option-item">
+                    <label for="fullscreen-toggle">Tela Cheia</label>
+                    <button class="toggle-btn" id="fullscreen-toggle" data-active="false">
+                        <i class="fas fa-expand"></i>
+                    </button>
+                </div>
+            </div>
         </div>
-        <div class="modal-footer">
-            <button class="btn-secondary" id="reset-options">Restaurar Padrões</button>
-            <button class="btn-primary close-btn" data-modal="options-modal">Salvar</button>
-        </div>
+        
+        <button class="btn-primary btn-save-options">Salvar</button>
     </div>
 </div>
