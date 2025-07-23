@@ -1,7 +1,13 @@
 const countdownEl = document.getElementById('countdown');
 const gameContent = document.getElementById('game-content');
 const ducksContainer = document.getElementById('ducks-container');
+const scoreEl = document.getElementById('score');
+const missesEl = document.getElementById('misses');
 
+
+let score = 0;
+let velocidadeMultiplicador = 1; // começa normal (100%)
+let erros = 0;
 let count = 3;
 
 const countdownInterval = setInterval(() => {
@@ -35,7 +41,8 @@ function gerarPato() {
     const fromLeft = Math.random() > 0.5;
 
     // Velocidade de voo mais lenta: entre 8 e 12 segundos
-    const velocidade = 8 + Math.random() * 4;
+    let velocidade = (8 + Math.random() * 4) * velocidadeMultiplicador;
+
 
     pato.style.top = `${10 + randomY * 70}%`;
 
@@ -65,40 +72,75 @@ function gerarPato() {
     }, 200);
 
     pato.addEventListener('animationend', () => {
-        clearInterval(animarAsas);
-        pato.remove();
-        gerarPato();
-    });
+    if (!pato.classList.contains('abatido')) {
+        erros++;
+        missesEl.textContent = erros;
+
+        if (erros >= 6) {
+            gameOver();
+            return;
+        }
+    }
+
+    clearInterval(animarAsas);
+    pato.remove();
+    gerarPato();
+});
+
 
     // Quando for clicado
     pato.addEventListener('click', () => {
+    if (pato.classList.contains('abatido')) return; // Evita múltiplos cliques
+        pato.classList.add('abatido');
+
         clearInterval(animarAsas);
 
         // Remove classe de voo
         pato.classList.remove('flying');
+        
 
+        pato.style.backgroundImage = "url('assets/tiro.png')";
+        
         // Mostra imagem de susto
         pato.style.backgroundImage = "url('assets/duck/pato-assustado.png')";
-        pato.style.animation = 'none'; // cancela qualquer animação anterior
 
         // Susto
-        pato.style.transform = 'translateY(-20px)';
+        pato.style.transform = 'translateY(-px)';
         setTimeout(() => {
             pato.style.transform = 'translateY(0)';
+
+            // Pega a posição atual do pato
+            const topAtual = pato.offsetTop;
+            pato.style.top = `${topAtual}px`; // fixa a posição atual no estilo inline
+            pato.style.left = pato.offsetLeft + 'px'; // trava o left para evitar movimentos laterais
+            pato.style.animation = 'none'; // remove a animação de voo
+            pato.offsetHeight; // força reflow para reiniciar animações
 
             // Troca imagem para caindo
             pato.style.backgroundImage = "url('assets/duck/pato-caindo.png')";
 
-            // Adiciona animação de queda
-            pato.classList.add('caindo');
 
+            // Adiciona classe de queda com animação vertical
+            pato.classList.add('queda');
             // Remove após cair
             setTimeout(() => {
+                score++;
+                scoreEl.textContent = score;
+                // Aumenta a velocidade do jogo após 20 patos abatidos
+                if (score === 20) {
+                    velocidadeMultiplicador = 0.7; // 30% mais rápido (100% - 30% = 70%)
+                    console.log('Velocidade aumentada em 30%!');
+                }
                 pato.remove();
                 gerarPato();
-            }, 1000); // tempo da animação de queda
-        }, 200); // duração do susto
+            }, 500); // tempo da animação de queda
+        }, 20); // duração do susto
     });
+
+    function gameOver() {
+    alert("Game Over! Mais de 6 patos escaparam.");
+    window.location.reload(); // reinicia o jogo (opcional)
+    }
 
 
     ducksContainer.appendChild(pato);

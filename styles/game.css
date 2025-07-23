@@ -63,7 +63,8 @@ body, html {
     display: none;
 }
 
-body, html {
+/* Second set of body/html/game-container styles are redundant, remove them */
+/* body, html {
     margin: 0;
     padding: 0;
     height: 100%;
@@ -75,18 +76,16 @@ body, html {
     height: 100%;
     position: relative;
     background-color: #cceeff;
-}
+} */
 
 #background {
-    width: 100%;
-    height: 100%;
+    /* Keep the background image from the second set of styles if it's the intended one */
     background: url('../assets/stage/cenario.png') no-repeat center center;
     background-size: cover;
-    position: absolute;
-    z-index: 0;
 }
 
-.countdown {
+/* Second countdown styles are also redundant, remove them */
+/* .countdown {
     position: absolute;
     font-size: 5rem;
     color: white;
@@ -102,11 +101,8 @@ body, html {
     0% { transform: translateX(-50%) scale(1); }
     50% { transform: translateX(-50%) scale(1.5); }
     100% { transform: translateX(-50%) scale(1); }
-}
+} */
 
-.hidden {
-    display: none;
-}
 
 #ducks-container {
     position: absolute;
@@ -115,23 +111,22 @@ body, html {
     top: 0;
     left: 0;
     z-index: 5;
-    pointer-events: none;
+    pointer-events: none; /* Allows clicks to pass through to ducks */
 }
+
 .duck {
     position: absolute;
-    width: 100px;          /* aumentei para mostrar imagem inteira */
-    height: 100px;         /* ajuste conforme a resolução da imagem */
-    background-size: contain;  /* para ajustar a imagem inteira dentro do div */
+    width: 100px;
+    height: 100px;
+    background-size: contain;
     background-repeat: no-repeat;
-    pointer-events: auto;
+    pointer-events: auto; /* Ducks are clickable */
     cursor: crosshair;
     will-change: transform, left, top;
+    /* Initial state for flying animation */
 }
 
-.duck.falling {
-    animation: fall 1s linear forwards !important;
-}
-
+/* Animation for flying from left to right */
 @keyframes fly-left {
     from {
         left: -100px;
@@ -141,6 +136,7 @@ body, html {
     }
 }
 
+/* Animation for flying from right to left */
 @keyframes fly-right {
     from {
         left: 110%;
@@ -150,35 +146,83 @@ body, html {
     }
 }
 
+/* Existing wing flapping animation, though it's overridden by JavaScript now */
 @keyframes baterAsas {
     0%, 100% { background-image: url('../assets/duck/pato-asas-aberta.png'); }
     33% { background-image: url('../assets/duck/pato-asas-central.png'); }
     66% { background-image: url('../assets/duck/pato-asas-fechada.png'); }
 }
 
-@keyframes queda {
-    to {
-        top: calc(100% - 80px); /* até o chão, ajuste conforme o tamanho do pato */
-        transform: rotate(90deg);
-        opacity: 1;
-    }
-}
-
-.duck.caindo {
-    animation: queda 1s ease-in forwards;
-    position: absolute;
-}
-
-.duck.flying {
-    animation: flyAcross 6s linear forwards;
-}
-
-.duck.assustado {
-    animation: susto 0.2s ease;
+/* Novo: Animação de susto */
+.duck.scared {
+    animation: susto 0.2s ease-out forwards; /* 'forwards' para manter o estado final */
 }
 
 @keyframes susto {
     0% { transform: translateY(0); }
-    50% { transform: translateY(-20px); }
-    100% { transform: translateY(0); }
+    50% { transform: translateY(-20px); } /* Pato sobe um pouco */
+    100% { transform: translateY(0); } /* Volta à posição original do susto */
 }
+
+.duck.queda {
+    animation: queda 2s ease-in forwards;
+    background-image: url('../assets/duck/pato-caindo.png') !important;
+    transform-origin: center; /* Define o ponto de rotação no centro do pato */
+    transform: translateX(-50%);
+}
+
+@keyframes queda {
+    to {
+        top: 100vh; /* vai até o fundo da tela */
+        opacity: 0;
+      }
+}
+
+#info-bar {
+    position: absolute;
+    top: 20px;
+    left: 0;
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    gap: 10px;
+    padding: 0 20px;
+    box-sizing: border-box;
+    z-index: 20;
+}
+
+#score-board, #misses-board {
+    font-size: 1.1rem;
+    font-weight: bold;
+    color: #fff;
+    background: linear-gradient(to right, #0f0f0f, #1f1f1f);
+    padding: 10px 16px;
+    border-radius: 12px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.4);
+    backdrop-filter: blur(4px);
+    white-space: nowrap;
+    flex: 1 1 auto;
+    min-width: 140px;
+    text-align: center;
+    transition: all 0.3s ease;
+}
+
+#score-board {
+    border-left: 5px solid #4caf50;
+}
+
+#misses-board {
+    border-left: 5px solid #f44336;
+}
+
+/* Responsivo para telas menores */
+@media (max-width: 480px) {
+    #score-board, #misses-board {
+        font-size: 1rem;
+        padding: 8px 12px;
+        min-width: 120px;
+    }
+}
+
+
