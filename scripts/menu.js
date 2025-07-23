@@ -236,17 +236,22 @@ class MenuController {
 
     openModal(modal) {
         if (!modal) return;
+        // Garante que o modal esteja usando display flex (sobrescreve 'display: none' inline)
+        modal.style.display = 'flex';
+        // Remove a classe hidden para acionar visibilidade no CSS
         modal.classList.remove('hidden');
-        // Adiciona a classe 'show' para iniciar a animação de entrada do conteúdo
-        setTimeout(() => modal.classList.add('show'), 10); // Pequeno delay para garantir a transição
+        // Adiciona a classe 'show' (após pequeno delay) para disparar animação de entrada
+        setTimeout(() => modal.classList.add('show'), 10);
     }
 
     closeModal(modal) {
         if (!modal) return;
+        // Remove classe 'show' para iniciar animação de saída
         modal.classList.remove('show');
-        // Espera a transição de saída terminar para adicionar a classe 'hidden'
+        // Após transição, adiciona 'hidden' e volta display a none
         modal.addEventListener('transitionend', () => {
             modal.classList.add('hidden');
+            modal.style.display = 'none';
         }, { once: true });
     }
 
