@@ -121,6 +121,8 @@ function gerarPato() {
 
 
             // Adiciona classe de queda com animação vertical
+            console.log('Classe falling adicionada ao pato');
+
             pato.classList.add('falling');
             // Remove após cair
             setTimeout(() => {

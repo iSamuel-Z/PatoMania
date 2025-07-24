@@ -176,13 +176,33 @@ body, html {
 }
 
 .falling {
-    animation: duckFall 1s ease-in forwards;
+    animation: duckFall 2s ease-in forwards;
+}
+
+@keyframes duckFall {
+    0% { 
+        transform: translateY(0px) rotate(0deg); opacity: 1; 
+    }
+    100% { 
+        transform: translateY(100vh) rotate(90deg); opacity: 0; 
+    }
+}
+
+.teste-fall {
+    width: 50px;
+    height: 50px;
+    background: red;
+    position: absolute;
+    top: 0;
+    left: 50%;
+    animation: duckFall 2s ease-in forwards;
 }
 
 @keyframes duckFall {
     0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
-    100% { transform: translateY(100px) rotate(45deg); opacity: 0; }
+    100% { transform: translateY(100vh) rotate(90deg); opacity: 0; }
 }
+
 
 #info-bar {
     position: absolute;
@@ -230,5 +250,3 @@ body, html {
         min-width: 120px;
     }
 }
-
-
