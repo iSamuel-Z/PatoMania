@@ -24,5 +24,15 @@
         <div id="misses-board">🚫 Patos escaparam: <span id="misses">0</span></div>
     </div>
 
+    <div id="game-over" class="hidden">
+    <div class="popup">
+        <h2>Game Over</h2>
+        <p>Você deixou <span id="missed-count"></span> patos escaparem.</p>
+        <p>Patos abatidos: <span id="final-score"></span></p>
+        <button onclick="window.location.reload()">Jogar novamente</button>
+    </div>
+    </div>
+
+
     <script src="/scripts/game.js"></script>
 </body>

@@ -164,18 +164,24 @@ body, html {
     100% { transform: translateY(0); } /* Volta à posição original do susto */
 }
 
-.duck.queda {
-    animation: queda 2s ease-in forwards;
-    background-image: url('../assets/duck/pato-caindo.png') !important;
-    transform-origin: center; /* Define o ponto de rotação no centro do pato */
-    transform: translateX(-50%);
+/* Efeitos de acerto */
+.hit-effect {
+    animation: hitFlash 0.3s ease-out;
 }
 
-@keyframes queda {
-    to {
-        top: 100vh; /* vai até o fundo da tela */
-        opacity: 0;
-      }
+@keyframes hitFlash {
+    0% { filter: brightness(1); }
+    50% { filter: brightness(2) saturate(2); }
+    100% { filter: brightness(1); }
+}
+
+.falling {
+    animation: duckFall 1s ease-in forwards;
+}
+
+@keyframes duckFall {
+    0% { transform: translateY(0px) rotate(0deg); opacity: 1; }
+    100% { transform: translateY(100px) rotate(45deg); opacity: 0; }
 }
 
 #info-bar {

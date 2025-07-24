@@ -76,7 +76,7 @@ function gerarPato() {
         erros++;
         missesEl.textContent = erros;
 
-        if (erros >= 6) {
+        if (erros >= 3) {
             gameOver();
             return;
         }
@@ -121,24 +121,33 @@ function gerarPato() {
 
 
             // Adiciona classe de queda com animação vertical
-            pato.classList.add('queda');
+            pato.classList.add('falling');
             // Remove após cair
             setTimeout(() => {
                 score++;
                 scoreEl.textContent = score;
-                // Aumenta a velocidade do jogo após 20 patos abatidos
-                if (score === 20) {
-                    velocidadeMultiplicador = 0.7; // 30% mais rápido (100% - 30% = 70%)
+
+                // Aumenta a velocidade do jogo após 7, 15 e 25 patos abatidos
+                if (score === 7) {
+                    velocidadeMultiplicador = 0.7; // 30% mais rápido
                     console.log('Velocidade aumentada em 30%!');
+                } else if (score === 15) {
+                    velocidadeMultiplicador = 0.5; // 50% mais rápido
+                    console.log('Velocidade aumentada em 50%!');
+                } else if (score === 25) {
+                    velocidadeMultiplicador = 0.35; // 65% mais rápido
+                    console.log('Velocidade aumentada em 65%!');
                 }
+
                 pato.remove();
                 gerarPato();
-            }, 500); // tempo da animação de queda
-        }, 20); // duração do susto
+            }, 500);
+ // tempo da animação de queda
+        }, 20); // duração do sus0to
     });
 
     function gameOver() {
-    alert("Game Over! Mais de 6 patos escaparam.");
+    alert("Game Over! Mais de 3 patos escaparam.");
     window.location.reload(); // reinicia o jogo (opcional)
     }
 
